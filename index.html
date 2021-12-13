@@ -11,7 +11,7 @@
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
   <!-- css -->
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="styles.css">
 
   <!-- icon -->
   <script src="https://kit.fontawesome.com/7698437cc7.js" crossorigin="anonymous"></script>
@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
 
-<title>Weather-info</title>
+<title>Weather-info-application</title>
 <link rel="icon" href="images/sun1.png">
 </head>
 
@@ -61,7 +61,10 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto">
               <li class="nav-item mx-2">
-                <a class="nav-link" href="#">Celcius</a>
+                <a class="nav-link" onclick="celsius();">Celcius</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link" onclick="fahrenheit();">Fahrenheit</a>
               </li>
               
                 <li class="nav-item dropdown mx-2">
@@ -82,12 +85,22 @@
        <div class="text-center">
           
           <div class="input-group search">    <!--Search bar-->
-            <button id="button"  class="fas fa-search input-group-text search-icon"></button>
+            <button id="search"  class="fas fa-search input-group-text search-icon"></button>
             <input id="city" type="text" class="form-control search-bar" placeholder="Search places">
           </div>
 
-          <img src="images/cloudy.png" class="img-fluid image" alt="...">   <!--Weather image-->
+          <script>
+            var input = document.getElementById("city");
+            input.addEventListener("keyup", function(event) {
+              if (event.keyCode === 13) {
+                event.preventDefault();
+                document.getElementById("search").click();
+              }
+            });</script>
 
+
+          <img src="images/cloudy.png" class="img-fluid image" alt="...">   <!--Weather image-->
+          
         </div>
        
         <h1 class="temperature"> <span class="temp"></span> <span class="units">&#176C</span></h1>  <!--Temperature-->
@@ -102,10 +115,10 @@
         <div class="bottom">
          
           <img src="images/cloud.png" class="float-start cloudy" alt="">
-          <p class="wdesc text-start txt txt-1">Mostly Cloudy</p>
+          <p id="wdesc" class="text-start txt txt-1">Mostly Cloudy</p>
 
           <img src="images/water-drops.png" class="float-start rainy" alt="">
-          <p class="wmain text-start txt txt-2">Rain - 30%</p>
+          <p  id="wmain" class="text-start txt txt-2">Rain - 30%</p>
 
         </div>
 
@@ -137,16 +150,18 @@
               <ul class="navbar-nav ms-auto">
                 
                 <li class="nav-item">
-                  <button type="button" id="celsius" class="btn btn-secondary rounded-circle mx-1 nav-item-lg">C</button>
+                  <button type="button" id="celsius" onclick="celsius();" class="btn btn-secondary rounded-circle mx-1 nav-item-lg">C</button>
                 </li>
                 <li class="nav-item">
-                  <button type="button" id="fahrenheit" class="btn  btn-secondary rounded-circle mx-1 nav-item-lg">F</button>
+                  <button type="button" id="fahrenheit" onclick="fahrenheit();" class="btn  btn-secondary rounded-circle mx-1 nav-item-lg">F</button>
                 </li>
 
                 <li class="nav-item mx-2 nav-item-md">
-                  <a class="nav-link" href="#">Celcius</a>
+                  <a class="nav-link" onclick="celsius();">Celcius</a>
                 </li>
-                
+                <li class="nav-item mx-2 nav-item-md">
+                  <a class="nav-link" onclick="fahrenheit();">Fahrenheit</a>
+                </li>
 
                  <li class="nav-item dropdown mx-2">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -219,9 +234,9 @@
 
               <div class="col-lg-4 mx-auto my-3 highlight">
                 <p class="highlight-head mt-2 mx-2">Wind status</p>
-                <h1 class="wind mx-2 pt-2">8.70 <span class="highlight-text">km/h</span></h1>
+                <h1 id="wind" class="mx-2 pt-2">8.70 <span class="highlight-text">km/h</span></h1>
                 <i class="fas location-icon fa-map-marker-alt float-start mx-2 mt-2"></i>
-                <p class="cityname mx-5 highlight-bot"></p>
+                <p id="cityname" class="mx-5 highlight-bot"></p>
               </div>
 
               <div class="col-lg-4 mx-auto my-3 highlight">
@@ -232,7 +247,7 @@
                     <img src="images/sunrise.png" class="float-start" alt="">
         
                     <div style="line-height: 0.5;">
-                      <p class="sunrise mx-5">6:30 AM</p>
+                      <p id="sunrise"  class="mx-5">6:30 AM</p>
                     <p class="mx-5" style="font-size: x-small; color: #cbcbcb;">-2m 46s</p>
                     </div>
                   </div>
@@ -241,7 +256,7 @@
                     <img src="images/sunset.png" class="float-start" alt="">
         
                     <div style="line-height: 0.5;">
-                      <p class="sunset mx-5">5:45 PM</p>
+                      <p  id="sunset" class="mx-5">5:45 PM</p>
                     <p class="mx-5" style="font-size: x-small; color: #cbcbcb;">-3m 26s</p>
                     </div>
                   </div>
@@ -250,7 +265,7 @@
 
               <div class="col-lg-4 mx-auto my-3 highlight">
                 <p class="highlight-head mt-2 mx-2">Humidity</p>
-                <h1 class="mx-2 pt-2"> <span class="humidity">12</span></h1>
+                <h1 id="humidity" class="mx-2 pt-2">12<span class="highlight-text">%</span></h1>
                 <p class="mx-2 highlight-bot status">Status: <span class="quality-humidity">Good Quality</span></p>
 
                 <input class="slider-1" type="range" min="0" max="100" step="0.1" value="12">
@@ -258,7 +273,7 @@
 
               <div class="col-lg-4 mx-auto my-3 highlight">
                 <p class="highlight-head mt-2 mx-2">Visiblity</p>
-                <h1 class="mx-2 pt-2"> <span class="visibility">8.4</span> <span class="highlight-text">m</span></h1>
+                <h1 id="visibility" class="mx-2 pt-2">8.4</span> <span class="highlight-text">m</span></h1>
                 <p class="mx-2 highlight-bot status">Status: <span class="quality-visiblity">Average</span></p>
                 <input class="slider-2" type="range" min="0" max="100" step="0.1" value="12">
               </div>
