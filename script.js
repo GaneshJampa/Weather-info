@@ -2,7 +2,7 @@ function fahrenheit(){
     var value;
     var urlcel;
            value = document.getElementById("city").value;
-             urlcel="https://api.openweathermap.org/data/2.5/weather?q="+value+"&appid=679a1ed886ed6c003e3e37adecc4d85e";
+             urlcel="https://api.openweathermap.org/data/2.5/weather?q="+value+"&appid=679a1ed886ed6c003e3e37adecc4d85e&units=imperial";
     $.ajax({ 
       url: urlcel
     }).done(function( data ){
